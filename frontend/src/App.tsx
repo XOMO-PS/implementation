@@ -1,6 +1,7 @@
-import React,{useState} from "react";
+import React, { useState } from "react";
 import { Button } from "./ui/Button";
 import Checkbox from "./ui/Checkbox";
+import { Input } from "./ui/Input";
 function App() {
   const [isChecked, setIsChecked] = useState<boolean>(false);
 
@@ -10,6 +11,14 @@ function App() {
   };
   return (
     <div className="flex flex-col items-center justify-center mt-4">
+      <div className="w-6/12">
+        <Input
+          inputSize="small"
+          placeholder="Enter Value"
+          leftIcon={"eye"}
+          rightIcon={"phone"}
+        />
+      </div>
       <div className="flex flex-row">
         <div className="flex flex-col">
           <div className="w-48 mt-2">
@@ -191,13 +200,12 @@ function App() {
         </div>
         <div className="flex flex-col ml-4">
           <div className="w-48 mt-2">
-              <Checkbox
-                  label="CheckBox"
-                  isChecked={isChecked}
-                  onChange={handleCheckboxChange}
-                />
+            <Checkbox
+              label="CheckBox"
+              isChecked={isChecked}
+              onChange={handleCheckboxChange}
+            />
           </div>
-          
         </div>
       </div>
     </div>
