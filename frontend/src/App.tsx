@@ -7,12 +7,12 @@ function App() {
 
   return (
     <div className="flex flex-col items-center justify-center mt-4">
-      <div className="w-6/12">
+      <div className="w-64">
         <Input
           inputSize="small"
           placeholder="Enter Value"
-          leftIcon={"eye"}
-          rightIcon={"phone"}
+          leftIcon={"email"}
+          rightIcon={"eyeOff"}
         />
       </div>
       <div className="flex flex-row">

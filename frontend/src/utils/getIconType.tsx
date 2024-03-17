@@ -12,47 +12,65 @@ export type IconType =
   | "eye"
   | "eyeOff"
   | "tick";
-export function getIconType(iconType: IconType) {
+
+export type ColorType =
+  | "black"
+  | "white"
+  | "blue"
+  | "green"
+  | "lightGreen"
+  | "red"
+  | "darkGreen"
+  | "gray"
+  | "lightBlue";
+
+export function getIconType(iconType: IconType, color: ColorType = "black") {
+  const colorStyle = `text-${color}`;
+  const iconStyle = `absolute ${colorStyle}`;
   switch (iconType) {
     case "user":
       return (
-        <div className="w-6 h-6 text-darkGreen absolute mt-2">
-          <FaRegUser />
+        <div className={iconStyle}>
+          <FaRegUser className="w-5 h-5" />
         </div>
       );
     case "email":
       return (
-        <div className="text-darkGreen absolute">
+        <div className={iconStyle}>
           <MdOutlineMail className="w-5 h-5" />
         </div>
       );
     case "phone":
       return (
-        <div className="text-darkGreen absolute">
+        <div className={iconStyle}>
           <MdLocalPhone className="w-5 h-5" />
         </div>
       );
 
     case "lock":
       return (
-        <div className="text-darkGreen absolute">
+        <div className={iconStyle}>
           <FaLock className="w-5 h-5" />
         </div>
       );
     case "eye":
       return (
-        <div className="text-darkGreen absolute">
+        <div className={iconStyle}>
           <FaEye className="w-5 h-5" />
         </div>
       );
     case "eyeOff":
       return (
-        <div className="text-darkGreen absolute">
+        <div className={iconStyle}>
           <FaEyeSlash className="w-5 h-5" />
         </div>
       );
     case "tick":
-      return <TiTick className="w-5 h-5" />;
+      return (
+        <div className={iconStyle}>
+          <TiTick className="w-5 h-5" />
+        </div>
+      );
     default:
       return <></>;
   }
