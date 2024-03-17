@@ -13,20 +13,8 @@ export type IconType =
   | "eyeOff"
   | "tick";
 
-export type ColorType =
-  | "black"
-  | "white"
-  | "blue"
-  | "green"
-  | "lightGreen"
-  | "red"
-  | "darkGreen"
-  | "gray"
-  | "lightBlue";
-
-export function getIconType(iconType: IconType, color: ColorType = "black") {
-  const colorStyle = `text-${color}`;
-  const iconStyle = `absolute ${colorStyle}`;
+export function getIconType(iconType: IconType) {
+  const iconStyle = "absolute";
   switch (iconType) {
     case "user":
       return (

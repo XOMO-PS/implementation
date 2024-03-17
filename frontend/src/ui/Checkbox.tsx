@@ -10,8 +10,8 @@ export function CheckBox({ isChecked, onChange }: CheckboxProps) {
   return (
     <div className={checkboxStyle} onClick={onChange}>
       {isChecked && (
-        <div className="w-full h-full flex items-center justify-center">
-          {getIconType("tick", "lightBlue")}
+        <div className="w-full h-full flex items-center text-lightBlue justify-center">
+          {getIconType("tick")}
         </div>
       )}
     </div>

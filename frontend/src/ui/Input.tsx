@@ -25,14 +25,14 @@ export function Input({
   return (
     <div className="flex flex-row items-center relative">
       {leftIcon !== null && (
-        <div className="absolute items-center flex ml-4">
-          {getIconType(leftIcon, "darkGreen")}
+        <div className="absolute items-center flex ml-4 text-darkGreen">
+          {getIconType(leftIcon)}
         </div>
       )}
       <input className={inputStyle} {...props} />
       {rightIcon !== null && (
-        <div className="absolute items-center flex right-4 mr-4">
-          {getIconType(rightIcon, "darkGreen")}
+        <div className="absolute items-center flex right-4 mr-4 text-darkGreen">
+          {getIconType(rightIcon)}
         </div>
       )}
     </div>
