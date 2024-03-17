@@ -1,29 +1,19 @@
-import React from "react";
-import './css/checkbox.css'
-interface checkboxProps {
-    label : string,
-    isChecked: boolean,
-    onChange:(checked:boolean)=> void
-}
+import { getIconType } from "../utils/getIconType";
 
-const Checkbox : React.FC<checkboxProps> = ( {label,isChecked,onChange}) =>{
-    const handleCheckboxChange = () =>{
-        onChange(!isChecked);
-    }
-    return (
-        <div className="checkbox-container">
-            <label className="checkbox-label">
-
-                <input
-                    className="checkbox-input"
-                    type="checkbox"
-                    checked={isChecked}
-                    onChange={handleCheckboxChange}
-                />
-                <span className="checkbox-custom"></span>
-                {label}
-            </label>
+type CheckboxProps = {
+  isChecked: boolean;
+  onChange: () => void;
+};
+export function CheckBox({ isChecked, onChange }: CheckboxProps) {
+  const bgColor = isChecked ? "bg-darkGreen" : "bg-gray";
+  const checkboxStyle = `${bgColor} w-6 h-6 rounded`;
+  return (
+    <div className={checkboxStyle} onClick={onChange}>
+      {isChecked && (
+        <div className="w-full h-full flex items-center text-lightBlue justify-center">
+          {getIconType("tick")}
         </div>
-    );
+      )}
+    </div>
+  );
 }
-export default Checkbox;
