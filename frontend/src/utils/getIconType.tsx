@@ -1,6 +1,7 @@
 import { FaEye, FaEyeSlash, FaLock, FaRegUser } from "react-icons/fa";
 import { MdOutlineMail } from "react-icons/md";
 import { MdLocalPhone } from "react-icons/md";
+import { TiTick } from "react-icons/ti";
 
 export type IconType =
   | null
@@ -9,7 +10,8 @@ export type IconType =
   | "lock"
   | "phone"
   | "eye"
-  | "eyeOff";
+  | "eyeOff"
+  | "tick";
 export function getIconType(iconType: IconType) {
   switch (iconType) {
     case "user":
@@ -49,6 +51,8 @@ export function getIconType(iconType: IconType) {
           <FaEyeSlash className="w-5 h-5" />
         </div>
       );
+    case "tick":
+      return <TiTick className="w-5 h-5" />;
     default:
       return <></>;
   }

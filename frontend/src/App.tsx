@@ -1,14 +1,10 @@
 import React, { useState } from "react";
 import { Button } from "./ui/Button";
-import Checkbox from "./ui/Checkbox";
 import { Input } from "./ui/Input";
+import { CheckBox } from "./ui/Checkbox";
 function App() {
-  const [isChecked, setIsChecked] = useState<boolean>(false);
+  const [isChecked, setIsChecked] = useState(false);
 
-  const handleCheckboxChange = (newValue: boolean) => {
-    setIsChecked(newValue);
-    // Do whatever you need to do when the checkbox state changes
-  };
   return (
     <div className="flex flex-col items-center justify-center mt-4">
       <div className="w-6/12">
@@ -200,10 +196,11 @@ function App() {
         </div>
         <div className="flex flex-col ml-4">
           <div className="w-48 mt-2">
-            <Checkbox
-              label="CheckBox"
+            <CheckBox
               isChecked={isChecked}
-              onChange={handleCheckboxChange}
+              onChange={() => {
+                setIsChecked(!isChecked);
+              }}
             />
           </div>
         </div>
