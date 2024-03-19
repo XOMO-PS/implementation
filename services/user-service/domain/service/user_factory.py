@@ -12,7 +12,7 @@ class UserFactory:
         storage_user.firstName = user.firstName
         storage_user.lastName = user.lastName
         storage_user.email = user.email
-        storage_user.type = user.type
+        storage_user.type = "customer",
         storage_user.passwordHash = hashed_password
 
         if user.location:

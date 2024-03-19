@@ -13,7 +13,7 @@ def register_user():
     try:
         new_user = user(**data)
         user_service.register_user(new_user)
-        return jsonify({'error': error_message}), response_config.USER_SUCCESSFULLY_REGISTERED.status_code
+        return jsonify({'status': response_config.USER_SUCCESSFULLY_REGISTERED.message}), response_config.USER_SUCCESSFULLY_REGISTERED.status_code
     
     except Exception as e:
         error_message = str(e)
