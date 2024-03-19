@@ -1,5 +1,12 @@
 import pytest
 from unittest.mock import MagicMock
+
+import os
+import sys
+
+cwd = os.getcwd()
+sys.path.insert(0, os.path.join(cwd, "src"))
+
 from persistence import user_repository_impl
 from domain.model import storage_user
 
@@ -8,8 +15,12 @@ def mock_session():
     return MagicMock()
 
 @pytest.fixture
-def user_repo(mock_session):
-    repo = user_repository_impl()
+def mock_engine():
+    return MagicMock()
+
+@pytest.fixture
+def user_repo(mock_session, mock_engine):
+    repo = user_repository_impl.UserRepositoryImpl(engine=mock_engine)
     repo.Session = MagicMock(return_value=mock_session)
     return repo
 
