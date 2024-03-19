@@ -15,11 +15,10 @@ class UserFactory:
         storage_user.type = "customer",
         storage_user.passwordHash = hashed_password
 
-        if user.location:
-            storage_user.streetName = user.location.street
-            storage_user.house = user.location.house
-            storage_user.postalCode = user.location.postal_code
-            storage_user.city = user.location.city
-            storage_user.country = user.location.country
+        storage_user.streetName = user.street
+        storage_user.house = user.house
+        storage_user.postalCode = user.postal_code
+        storage_user.city = user.city
+        storage_user.country = user.country
 
         return storage_user

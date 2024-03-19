@@ -1,10 +1,10 @@
 from flask import Flask, request, jsonify
-from app import user_service
-from model import user
-from model import response_config
+from application import user_service
+from integration.model import user
+from integration.model import response_config
 
 app = Flask(__name__)
-user_service = user_service()
+user_service = user_service.UserService()
 
 @app.route('user/register/', methods=['POST'])
 def register_user():

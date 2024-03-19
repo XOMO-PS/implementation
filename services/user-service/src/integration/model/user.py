@@ -1,7 +1,6 @@
  #add fields of user class
 
 from dataclasses import dataclass
-from model import address
 
 @dataclass
 class User:
@@ -10,4 +9,8 @@ class User:
    email: str
    type: str
    passwordHash: str
-   location: address
+   streetName: str
+   house: str
+   postal: str
+   city: str
+   country: str

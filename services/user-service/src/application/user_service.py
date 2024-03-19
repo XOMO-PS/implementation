@@ -7,7 +7,7 @@ from integration.model import response
 class UserService:
 
     def __init__(self):
-        self.user_repo = user_repository_impl()
+        self.user_repo = user_repository_impl.UserRepositoryImpl()
     
     def is_user_info_complete(self, user_info:user) -> bool:
         return user_info.email or not user_info.passwordHash or not user_info.first_name or not user_info.last_name
