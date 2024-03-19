@@ -1,11 +1,22 @@
-from dataclasses import dataclass
-from model import storage_address as address
+from sqlalchemy import Column, Integer, String
+from sqlalchemy.ext.declarative import declarative_base
 
-@dataclass
-class StorageUser:
-   firstName: str
-   lastName: str
-   email: str
-   type: str
-   passwordHash: str
-   location: address
+
+Base = declarative_base()
+
+class StorageUser(Base):
+
+   __tablename__ = 'user'
+
+   id = Column(Integer, primary_key=True)
+
+   firstName = Column(String)
+   lastName = Column(String)
+   email = Column(String)
+   type = Column(String)
+   passwordHash = Column(String)
+   streetName = Column(String)
+   house = Column(String)
+   postal = Column(String)
+   city = Column(String)
+   country = Column(String)
