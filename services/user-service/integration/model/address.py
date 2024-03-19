@@ -1,4 +1,9 @@
- #add fields of user class.
+from dataclasses import dataclass
+
+@dataclass
 class Address:
-   def _init_(self)
-      print("implement me")
+    streetName: str
+    house: str
+    postal: str
+    city: str
+    country: str

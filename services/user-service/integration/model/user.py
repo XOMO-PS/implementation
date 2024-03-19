@@ -1,6 +1,13 @@
  #add fields of user class
 
+from dataclasses import dataclass
+from model import address
+
+@dataclass
 class User:
-   
-    def _init_(self)
-      print("implement me")
+   firstName: str
+   lastName: str
+   email: str
+   type: str
+   passwordHash: str
+   location: address
