@@ -1,0 +1,1 @@
+MYSQL_URI = 'mysql+pymysql://user:password@hostname/dbname'
