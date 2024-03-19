@@ -1,2 +1,9 @@
+from dataclasses import dataclass
+
+@dataclass
 class StorageAddress:
-    #add fields of user address class
+    streetName: str
+    house: str
+    postal: str
+    city: str
+    country: str
