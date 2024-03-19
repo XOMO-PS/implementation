@@ -17,6 +17,6 @@ class StorageUser(Base):
    passwordHash = Column(String)
    streetName = Column(String)
    house = Column(String)
-   postal = Column(String)
+   postalCode = Column(String)
    city = Column(String)
    country = Column(String)
