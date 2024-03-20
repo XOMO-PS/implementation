@@ -25,7 +25,6 @@ def mock_engine():
 
 @patch('persistence.user_repository_impl.create_engine')
 def test_register_user_success(mock_create_engine, client, monkeypatch):
-    # Mocking user service method
     def mock_register_user(new_user):
         pass  # Implement mock behavior if needed
 

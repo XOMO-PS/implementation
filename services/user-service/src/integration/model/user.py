@@ -1,6 +1,5 @@
- #add fields of user class
-
 from dataclasses import dataclass
+from typing import Optional
 
 @dataclass
 class User:
@@ -9,8 +8,8 @@ class User:
    email: str
    type: str
    passwordHash: str
-   streetName: str
-   house: str
-   postal: str
-   city: str
-   country: str
+   streetName: Optional[str] = None
+   house: Optional[str] = None
+   postalCode: Optional[str] = None
+   city: Optional[str] = None
+   country: Optional[str] = None

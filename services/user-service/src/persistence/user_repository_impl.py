@@ -17,11 +17,19 @@ class UserRepositoryImpl:
         self.Session = session_factory or sessionmaker(bind=self.engine)
 
 
-    def save_user(self, new_user:storage_user):
+    def save(self, new_user:storage_user):
         session = self.Session()
         session.add(new_user)
         session.commit()
         session.close()
+
+    def find_user_by_email(self, email:str):
+        session = self.Session()
+        try:
+            user = session.query(storage_user.StorageUser).filter_by(email=email).first()
+            return user
+        finally:
+            session.close()
 
 
     def find_user(self, userInfo:storage_user):
