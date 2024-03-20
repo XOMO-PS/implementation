@@ -1,11 +1,59 @@
-import React from "react";
+import React, { useState } from "react";
 import Dropdown from "../ui/Dropdown";
 import EditableDropdown from "../ui/Editabledropdown";
-import { GrUploadOption } from "react-icons/gr";
 import { Button } from "../ui/Button";
 import { MdOutlineDeleteForever } from "react-icons/md";
+import FileUpload from "../ui/Fileupload";
+import { FaPlus } from "react-icons/fa";
+
+interface WorkExperience {
+  company: string;
+  profession: string;
+  startDate: string;
+  endDate: string;
+}
 
 export function ProviderSignup() {
+  const [bio, setBio] = useState("");
+  const [workExperience, setWorkExperience] = useState<WorkExperience[]>([
+    {
+      company: "",
+      profession: "",
+      startDate: "",
+      endDate: "",
+    },
+  ]);
+  const [profession, setProfession] = useState("");
+  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  const handleDelete = (index: number) => {
+    setWorkExperience((prevWorkExperience) =>
+      prevWorkExperience.filter((_, i) => i !== index)
+    );
+  };
+  const handleAdd = () => {
+    if (workExperience.length < 3) {
+      setWorkExperience((prevWorkExperience) => [
+        ...prevWorkExperience,
+        {
+          company: "",
+          profession: "",
+          startDate: "",
+          endDate: "",
+        },
+      ]);
+    } else {
+      alert("You can only add up to 3 work experiences.");
+    }
+  };
+  const handleSubmit = () => {
+    const formData = {
+      workExperience,
+      profession,
+      uploadedFile,
+    };
+
+    console.log(formData);
+  };
   return (
     <div className="min-h-screen bg-blue justify-start items-center p-8">
       <header className="text-3xl font-bold text-white mb-12 self-start">
@@ -20,20 +68,43 @@ export function ProviderSignup() {
             <h4 className="font-poppins text-base text-black mb-8">
               Let people know about you in a glance
             </h4>
-            <textarea className="h-44 w-5/6 border border-blue rounded-2xl mb-8"></textarea>
+            <textarea
+              className="h-44 w-5/6 border hover:border-blue rounded-2xl p-4 mb-8"
+              value={bio}
+              onChange={(e) => setBio(e.target.value)}
+            />
           </div>
           <div>
-            <h2 className="font-poppins text-2xl text-darkGreen  font-bold mb-8">
-              Any previous work experience?
-            </h2>
+            <div className="flex  text-darkGreen space-x-20 md:space-x-60">
+              <h2 className="font-poppins text-2xl font-bold mb-8">
+                Any previous work experience?
+              </h2>
+              <button onClick={handleAdd}>
+                <FaPlus size={30} />
+              </button>
+            </div>
+
             <h4 className="font-poppins text-base text-black mb-8">
               Where have you worked?
             </h4>
-
-            <EditableDropdown />
-            <div className=" text-darkGreen">
-              <MdOutlineDeleteForever size={40} />
-            </div>
+            {workExperience.map((experience, index) => (
+              <div key={index}>
+                <EditableDropdown
+                  value={experience}
+                  onChange={(newExperience) => {
+                    const newWorkExperience = [...workExperience];
+                    newWorkExperience[index] = newExperience;
+                    setWorkExperience(newWorkExperience);
+                  }}
+                />
+                <div className="text-darkGreen">
+                  <MdOutlineDeleteForever
+                    size={40}
+                    onClick={() => handleDelete(index)}
+                  />
+                </div>
+              </div>
+            ))}
           </div>
         </div>
         <div className="col-span-2 grid-rows-2 gap-4 items-start  p-10">
@@ -47,6 +118,8 @@ export function ProviderSignup() {
             <Dropdown
               title="Profession"
               options={["Carpenter", "Plumber", "Electrician"]}
+              value={profession}
+              onChange={setProfession}
             />
           </div>
           <h2 className="font-poppins text-2xl text-darkGreen  font-bold mb-8">
@@ -56,10 +129,13 @@ export function ProviderSignup() {
             Upload a pdf of your identification document, either national ID or
             passport
           </h3>
-          <div className="h-40 w-20 md:h-100 md:w-200 items-center justify-center flex ml-4 bg-lightGreen text-darkGreen rounded-2xl mb-8">
-            <GrUploadOption size={50} />
-          </div>
-          <Button buttonType={"green"} buttonSize={"large"}>
+
+          <FileUpload onFileUpload={setUploadedFile} />
+          <Button
+            buttonType={"green"}
+            buttonSize={"large"}
+            onClick={handleSubmit}
+          >
             Submit
           </Button>
         </div>
