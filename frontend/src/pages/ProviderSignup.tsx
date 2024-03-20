@@ -11,7 +11,7 @@ export function ProviderSignup() {
       <header className="text-3xl font-bold text-white mb-12 self-start">
         XOMO
       </header>
-      <div className="grid grid-cols-5 gap-4  bg-white rounded-2xl p-20">
+      <div className="flex flex-col lg:grid lg:grid-cols-5 gap-4  bg-white rounded-2xl p-20">
         <div className="col-span-3 grid-rows-2 gap-4 items-start  p-10">
           <div>
             <h2 className="font-poppins text-2xl text-darkGreen  font-bold mb-8">
