@@ -55,7 +55,7 @@ export function ProviderSignup() {
     console.log(formData);
   };
   return (
-    <div className="min-h-screen bg-blue justify-start items-center p-8">
+    <div className="flex flex-col min-h-screen bg-blue justify-center items-center p-8">
       <header className="text-3xl font-bold text-white mb-12 self-start">
         XOMO
       </header>
@@ -69,13 +69,13 @@ export function ProviderSignup() {
               Let people know about you in a glance
             </h4>
             <textarea
-              className="h-44 w-5/6 border hover:border-blue rounded-2xl p-4 mb-8"
+              className="focus:darkGreen h-44 w-5/6 border hover:border-blue rounded-2xl p-4 mb-8"
               value={bio}
               onChange={(e) => setBio(e.target.value)}
             />
           </div>
           <div>
-            <div className="flex  text-darkGreen space-x-20 md:space-x-60">
+            <div className="flex  text-darkGreen space-x-10 md:space-x-40">
               <h2 className="font-poppins text-2xl font-bold mb-8">
                 Any previous work experience?
               </h2>
@@ -117,7 +117,15 @@ export function ProviderSignup() {
             </h4>
             <Dropdown
               title="Profession"
-              options={["Carpenter", "Plumber", "Electrician"]}
+              options={[
+                "Carpenter",
+                "Plumber",
+                "Electrician",
+                "Mason",
+                "Painter",
+                "Welder",
+                "Other",
+              ]}
               value={profession}
               onChange={setProfession}
             />
