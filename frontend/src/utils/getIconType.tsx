@@ -1,5 +1,13 @@
-import { FaEye, FaEyeSlash, FaLock, FaRegUser } from "react-icons/fa";
-import { MdOutlineMail } from "react-icons/md";
+import {
+  FaCaretDown,
+  FaEye,
+  FaEyeSlash,
+  FaLock,
+  FaMinus,
+  FaRegUser,
+} from "react-icons/fa";
+import { GrUploadOption } from "react-icons/gr";
+import { MdOutlineDeleteForever, MdOutlineMail } from "react-icons/md";
 import { MdLocalPhone } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
 
@@ -11,7 +19,11 @@ export type IconType =
   | "phone"
   | "eye"
   | "eyeOff"
-  | "tick";
+  | "tick"
+  | "upload"
+  | "dropdown"
+  | "dropup"
+  | "trash";
 
 export function getIconType(iconType: IconType) {
   const iconStyle = "absolute";
@@ -57,6 +69,30 @@ export function getIconType(iconType: IconType) {
       return (
         <div className={iconStyle}>
           <TiTick className="w-5 h-5" />
+        </div>
+      );
+    case "upload":
+      return (
+        <div className={iconStyle}>
+          <GrUploadOption className="w-5 h-5" />
+        </div>
+      );
+    case "dropdown":
+      return (
+        <div className={iconStyle}>
+          <FaCaretDown className="w-5 h-5" />
+        </div>
+      );
+    case "dropup":
+      return (
+        <div className={iconStyle}>
+          <FaMinus className="w-5 h-5" />
+        </div>
+      );
+    case "trash":
+      return (
+        <div className={iconStyle}>
+          <MdOutlineDeleteForever className="w-9 h-9" />
         </div>
       );
     default:
