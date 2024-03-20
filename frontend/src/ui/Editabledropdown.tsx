@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaCaretDown, FaMinus } from "react-icons/fa";
 import { Input } from "./Input";
 import { Button } from "./Button";
@@ -20,6 +20,7 @@ const EditableDropdown: React.FC<EditableDropdownProps> = ({
   onChange,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const handleInputChange = (field: keyof WorkExperience, newValue: string) => {
     onChange({ ...value, [field]: newValue });
@@ -28,9 +29,25 @@ const EditableDropdown: React.FC<EditableDropdownProps> = ({
   const handleSaveClick = () => {
     setIsOpen(false);
   };
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !(dropdownRef.current as HTMLElement).contains(
+          event.target as HTMLElement
+        )
+      ) {
+        setIsOpen(false);
+      }
+    };
 
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className="justify-between border-4 border-darkGreenv text-darkGreen px-4 py-2  w-5/6 rounded-lg flex items-center bg-transparent"
