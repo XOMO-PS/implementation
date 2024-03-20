@@ -11,38 +11,37 @@ const EditableDropdown = () => {
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="justify-between border border-blue text-blue px-4 py-2  w-3/4 rounded flex items-center bg-transparent"
+        className="justify-between border border-blue text-blue px-4 py-2  w-5/6 rounded flex items-center bg-transparent"
       >
         Profession
         {isOpen ? (
-          <FaMinus className="ml-20 " />
+          <FaMinus className="ml-2 " />
         ) : (
-          <FaCaretDown className="ml-20" />
+          <FaCaretDown className="ml-2" />
         )}
       </button>
       {isOpen && (
-        <div className="absolute bottom-0 left-0 mt-2 px-5 py-2 w-3/4 space-y-5 bg-white rounded-lg shadow-xl border border-blue">
-          <label className="flex items-center space-x-2">
+        <div className="absolute bottom-0 left-0 mt-2 px-5 py-2 w-5/6 space-y-5 bg-white rounded-lg shadow-xl border border-blue">
+          <label className="md:flex items-center space-x-2">
             <span>Company:</span>
             <div className="w-30">
               <Input inputSize="small" placeholder="" />
             </div>
           </label>
-          <label className="flex items-center space-x-2">
+          <label className="md:flex items-center space-x-2">
             <span>Profession:</span>
             <div className="w-30">
               <Input inputSize="small" placeholder="" />
             </div>
           </label>
-          <div></div>
-          <div className="flex space-x-4">
-            <label className="flex items-center space-x-2">
+          <div className="md:flex md:space-x-4">
+            <label className="md:flex items-center space-x-2">
               <span>Start date:</span>
               <div className="w-30">
                 <Input inputSize="small" placeholder="" />
               </div>
             </label>
-            <label className="flex items-center space-x-3">
+            <label className="md:flex items-center space-x-3">
               <span>End Date:</span>
               <div className="w-30">
                 <Input inputSize="small" placeholder="" />
