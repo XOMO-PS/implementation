@@ -7,7 +7,7 @@ import {
   FaRegUser,
 } from "react-icons/fa";
 import { GrUploadOption } from "react-icons/gr";
-import { MdOutlineMail } from "react-icons/md";
+import { MdOutlineDeleteForever, MdOutlineMail } from "react-icons/md";
 import { MdLocalPhone } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
 
@@ -22,7 +22,8 @@ export type IconType =
   | "tick"
   | "upload"
   | "dropdown"
-  | "dropup";
+  | "dropup"
+  | "trash";
 
 export function getIconType(iconType: IconType) {
   const iconStyle = "absolute";
@@ -86,6 +87,12 @@ export function getIconType(iconType: IconType) {
       return (
         <div className={iconStyle}>
           <FaMinus className="w-5 h-5" />
+        </div>
+      );
+    case "trash":
+      return (
+        <div className={iconStyle}>
+          <MdOutlineDeleteForever className="w-9 h-9" />
         </div>
       );
     default:

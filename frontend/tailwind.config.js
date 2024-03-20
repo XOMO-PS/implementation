@@ -16,6 +16,7 @@ module.exports = {
       },
       fontFamily: {
         poppins: ["Poppins"],
+        quicksand: ["Quicksand"],
       },
     },
   },

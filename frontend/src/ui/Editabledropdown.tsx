@@ -47,10 +47,10 @@ const EditableDropdown: React.FC<EditableDropdownProps> = ({
     };
   }, []);
   return (
-    <div className="relative" ref={dropdownRef}>
+    <div className="relative flex w-full" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="justify-between border-[3px] border-darkGreenv text-darkGreen px-4 py-2  w-5/6 rounded-lg flex items-center bg-transparent font-poppins font-medium"
+        className="justify-between border-[3px] w-full border-darkGreen text-darkGreen px-4 py-2 rounded-lg flex items-center bg-transparent font-poppins font-medium"
       >
         Profession
         {isOpen ? (
@@ -60,10 +60,10 @@ const EditableDropdown: React.FC<EditableDropdownProps> = ({
         )}
       </button>
       {isOpen && (
-        <div className="absolute bottom-0 left-0 mt-2 px-5 py-2 w-5/6 space-y-5 bg-white rounded-lg shadow-xl border border-blue">
-          <label className="md:flex items-center space-x-2">
+        <div className="absolute bottom-0 left-0 flex flex-col w-full mt-2 px-5 bg-white rounded-lg shadow-xl border border-blue items-center justify-center">
+          <label className="flex items-center justify-center space-x-2 w-full mt-4 mb-4">
             <span>Company:</span>
-            <div className="w-30">
+            <div className="w-56">
               <Input
                 inputSize="small"
                 value={value.company}
@@ -71,9 +71,9 @@ const EditableDropdown: React.FC<EditableDropdownProps> = ({
               />
             </div>
           </label>
-          <label className="md:flex items-center space-x-2">
+          <label className="flex items-center space-x-2 w-full justify-center mb-4">
             <span>Profession:</span>
-            <div className="w-30">
+            <div className="w-56">
               <Input
                 inputSize="small"
                 value={value.profession}
@@ -83,10 +83,10 @@ const EditableDropdown: React.FC<EditableDropdownProps> = ({
               />
             </div>
           </label>
-          <div className="md:flex md:space-x-4">
-            <label className="md:flex items-center space-x-2">
+          <div className="flex flex-col w-full">
+            <label className="md:flex items-center space-x-2 w-full flex justify-center mb-4">
               <span>Start date:</span>
-              <div className="w-30">
+              <div className="w-56">
                 <Input
                   type="date"
                   inputSize="small"
@@ -97,9 +97,9 @@ const EditableDropdown: React.FC<EditableDropdownProps> = ({
                 />
               </div>
             </label>
-            <label className="md:flex items-center space-x-3">
+            <label className="md:flex items-center space-x-2 w-full flex justify-center mb-8">
               <span>End Date:</span>
-              <div className="w-30">
+              <div className="w-56">
                 <Input
                   type="date"
                   inputSize="small"
@@ -109,13 +109,18 @@ const EditableDropdown: React.FC<EditableDropdownProps> = ({
               </div>
             </label>
           </div>
-          <Button
-            buttonType={"blue"}
-            buttonSize={"small"}
-            onClick={handleSaveClick}
-          >
-            Save
-          </Button>
+
+          <div className="w-full items-center justify-center flex mb-4">
+            <div className="w-32 items-center">
+              <Button
+                buttonType={"blue"}
+                buttonSize={"small"}
+                onClick={handleSaveClick}
+              >
+                Save
+              </Button>
+            </div>
+          </div>
         </div>
       )}
     </div>
