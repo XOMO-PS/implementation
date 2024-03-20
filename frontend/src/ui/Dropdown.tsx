@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { FaCaretDown, FaMinus } from "react-icons/fa";
 
 interface DropdownProps {
@@ -15,14 +15,32 @@ const Dropdown: React.FC<DropdownProps> = ({
   onChange,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
+  const dropdownRef = useRef(null);
 
   const handleOptionClick = (option: string) => {
     onChange(option);
     setIsOpen(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !(dropdownRef.current as HTMLElement).contains(
+          event.target as HTMLElement
+        )
+      ) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
   return (
-    <div className="relative">
+    <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
         className={`justify-between border-4 border-darkGreen ${
@@ -37,7 +55,7 @@ const Dropdown: React.FC<DropdownProps> = ({
         )}
       </button>
       {isOpen && (
-        <ul className="absolute left-0 mt- py-2 w-5/6 bg-white border-t-0 border-4 border-darkGreen rounded-t-none rounded-lg shadow-xl">
+        <ul className="absolute left-0 mt- py-2 w-5/6 bg-white border-t-0 border-4 border-darkGreen max-h-64 overflow-y-auto  rounded-t-none rounded-lg shadow-xl">
           {options.map((option, index) => (
             <li
               key={index}
