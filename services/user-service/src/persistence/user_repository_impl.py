@@ -2,8 +2,8 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
-from config.app_config import MYSQL_URI
-from domain.model import storage_user
+from src.config.app_config import AppConfig
+from src.domain.model import storage_user
 
 from sqlalchemy.orm import declarative_base
 Base = declarative_base()
@@ -11,7 +11,8 @@ Base = declarative_base()
 class UserRepositoryImpl:
 
     def __init__(self, engine=None, session_factory=None):
-        self.engine = engine or create_engine(MYSQL_URI)
+        uri = AppConfig().get_mysql_uri
+        self.engine = engine or create_engine(uri)
         Base.metadata.create_all(self.engine)
         self.Session = session_factory or sessionmaker(bind=self.engine)
 

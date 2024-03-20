@@ -1,7 +1,7 @@
 import bcrypt
 
-from integration.model import user
-from domain.model.storage_user import StorageUser
+from src.integration.model import user
+from src.domain.model.storage_user import StorageUser
 
 class UserFactory:
 

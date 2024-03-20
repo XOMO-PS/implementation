@@ -1,4 +1,6 @@
-from integration.model import response
+from src.integration.model import response
+
+INVALID_REQUEST = response.Response(message="Missing or empty request body", status_code=400)
 
 USER_SUCCESSFULLY_REGISTERED = response.Response(message="User succesfully registered", status_code=200)
 USER_ALREADY_REGISTERED = response.Response(message="User with this email is already registered", status_code=409)

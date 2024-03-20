@@ -1,0 +1,31 @@
+service: user-service
+
+frameworkVersion: '3'
+
+package:
+  patterns:
+    - '!.**/**'
+
+provider:
+  name: aws
+  runtime: python3.9
+  region: eu-north-1
+
+functions:
+   registration:
+      handler: src.integration.user_controller.registration_handler
+      events:
+         - http:
+            path: user/register
+            method: post
+            integration: lambda-proxy
+            cors: true
+
+plugins:
+  - serverless-wsgi
+  - serverless-python-requirements
+
+# custom:
+#   pythonRequirements:
+#      dockerizePip: false
+#      zip: true

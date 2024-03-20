@@ -1,8 +1,8 @@
-from integration.model import user
-from persistence import user_repository_impl
-from domain.service import user_factory
-from integration.model import response_config
-from integration.model import response
+from src.integration.model import user
+from src.persistence import user_repository_impl
+from src.domain.service import user_factory
+from src.integration.model import response_config
+from src.integration.model import response
 
 class UserService:
 
@@ -28,7 +28,7 @@ class UserService:
             self.user_repo.save(self.user_factory.map_user_to_storage(user_info))
             return response_config.USER_SUCCESSFULLY_REGISTERED
         else:
-            return response_config.USER_ALREADY_REGISTERD
+            return response_config.USER_ALREADY_REGISTERED
 
 
     def is_user_registered(self, email: str) -> bool:

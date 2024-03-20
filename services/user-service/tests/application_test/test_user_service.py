@@ -58,6 +58,6 @@ def test_register_user_already_registered(user_service_instance, mock_user_repo)
 
     response = user_service_instance.register_user(mock_user_info_complete)
 
-    assert response == response_config.USER_ALREADY_REGISTERD
+    assert response == response_config.USER_ALREADY_REGISTERED
 
     mock_user_repo.save.assert_not_called()   
