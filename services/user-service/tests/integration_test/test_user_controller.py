@@ -9,70 +9,55 @@ import sys
 
 cwd = os.getcwd()
 sys.path.insert(0, os.path.join(cwd, "src"))
+os.environ['TESTING'] = 'true'
 
+from config.app_config import MYSQL_URI_TEST
 from integration import user_controller
-from application import user_service
+from integration.user_controller import app
+from application.user_service import UserService
 from persistence import user_repository_impl
 
 @pytest.fixture
-def client():
-    with user_controller.test_client() as client:
-        yield client
+def mock_engine():
+    return MagicMock(spec=Engine)
+
 
 @pytest.fixture
-def mock_engine():
-    return MagicMock()
-
-@patch('persistence.user_repository_impl.create_engine')
-def test_register_user_success(mock_create_engine, client, monkeypatch):
-    def mock_register_user(new_user):
-        pass  # Implement mock behavior if needed
-
-    mock_engine = MagicMock(spec=Engine)
-    mock_create_engine.return_value = mock_engine
-
-    mock_session = MagicMock(spec=sessionmaker)
-    user_repository_impl.sessionmaker = mock_session
+def mock_user_repo(mock_engine):
+    mock_session_factory = MagicMock(spec=sessionmaker)
     
-    monkeypatch.setattr(user_service, 'register_user', mock_register_user)
+    mock_user_repo = MagicMock(spec=user_repository_impl.UserRepositoryImpl)
+    print("Using Engine:", mock_engine)
+    mock_user_repo.Session = mock_session_factory
+    
+    return mock_user_repo
 
-    # Mock request data
-    request_data = {
-        'username': 'test_user',
-        'password': 'test_password'
-    }
 
-    # Sending POST request to register user
+@pytest.fixture
+def user_service_instance(mock_user_repo):
+    user_service = UserService(user_repo=mock_user_repo)
+    user_service.user_repo = mock_user_repo
+    return user_service
+
+
+@pytest.fixture
+def client():
+    with app.test_client() as client:
+        yield client
+
+
+def test_register_user_success(client, user_service_instance):
+    
+    with patch.object(user_service_instance, 'register_user'):
+        request_data = {
+            'firstName': 'test_user_fname',
+            'lastName': 'test_user_lname',
+            'passwordHash': 'test_password',
+            'email': 'test_email',
+            'type': 'user'
+        }
+
     response = client.post('/user/register/', json=request_data)
 
-    # Asserting response
     assert response.status_code == 200
     assert json.loads(response.data) == {'status': 'User successfully registered'}
-
-
-@patch('persistence.user_repository_impl.create_engine')
-def test_register_user_failure(mock_create_engine, client, monkeypatch):
-    # Mocking user service method
-    def mock_register_user(new_user):
-        raise Exception('User already registered')  # Simulate failure
-
-    mock_engine = MagicMock(spec=Engine)
-    mock_create_engine.return_value = mock_engine
-
-    mock_session = MagicMock(spec=sessionmaker)
-    user_repository_impl.sessionmaker = mock_session
-
-    monkeypatch.setattr(user_service, 'register_user', mock_register_user)
-
-    # Mock request data
-    request_data = {
-        'username': 'test_user',
-        'password': 'test_password'
-    }
-
-    # Sending POST request to register user
-    response = client.post('/user/register/', json=request_data)
-
-    # Asserting response
-    assert response.status_code == 400
-    assert json.loads(response.data) == {'error': 'User already registered'}

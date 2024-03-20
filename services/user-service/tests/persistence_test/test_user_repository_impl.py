@@ -1,12 +1,6 @@
 import pytest
 from unittest.mock import MagicMock
 
-import os
-import sys
-
-cwd = os.getcwd()
-sys.path.insert(0, os.path.join(cwd, "src"))
-
 from persistence import user_repository_impl
 from domain.model import storage_user
 
@@ -26,7 +20,7 @@ def user_repo(mock_session, mock_engine):
 
 def test_save_user(mock_session, user_repo):
     user = MagicMock(spec=storage_user)
-    user_repo.save_user(user)
+    user_repo.save(user)
 
     mock_session.add.assert_called_once_with(user)
     mock_session.commit.assert_called_once()

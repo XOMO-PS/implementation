@@ -2,12 +2,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 
+from config.app_config import MYSQL_URI
 from domain.model import storage_user
 
 from sqlalchemy.orm import declarative_base
 Base = declarative_base()
-
-MYSQL_URI = 'mysql://user:password@hostname/dbname'
 
 class UserRepositoryImpl:
 

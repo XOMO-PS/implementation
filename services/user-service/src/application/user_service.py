@@ -7,6 +7,7 @@ from integration.model import response
 class UserService:
 
     def __init__(self, user_repo=None):
+        print("using repo:", user_repo)
         self.user_repo = user_repo or user_repository_impl.UserRepositoryImpl()
         self.user_factory = user_factory.UserFactory()
     

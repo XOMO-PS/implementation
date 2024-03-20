@@ -6,12 +6,12 @@ from integration.model import response_config
 app = Flask(__name__)
 user_service = user_service.UserService()
 
-@app.route('user/register/', methods=['POST'])
+@app.route('/user/register/', methods=['POST'])
 def register_user():
     data = request.get_json()
 
     try:
-        new_user = user(**data)
+        new_user = user.User(**data)
         user_service.register_user(new_user)
         return jsonify({'status': response_config.USER_SUCCESSFULLY_REGISTERED.message}), response_config.USER_SUCCESSFULLY_REGISTERED.status_code
     

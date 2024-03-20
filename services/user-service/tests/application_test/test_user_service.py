@@ -1,12 +1,6 @@
 import pytest
 from unittest.mock import MagicMock
 
-import os
-import sys
-
-cwd = os.getcwd()
-sys.path.insert(0, os.path.join(cwd, "src"))
-
 from integration.model import user
 from application.user_service import UserService
 from persistence import user_repository_impl
@@ -28,6 +22,7 @@ def mock_user_repo():
     mock_user_repo.Session = mock_session_factory
     
     return mock_user_repo
+
 
 @pytest.fixture
 def user_service_instance(mock_user_repo):
@@ -54,6 +49,7 @@ def test_register_user_incomplete_info(user_service_instance, mock_user_repo):
     assert response == response_config.USER_INFO_INCOMPLETE
 
     mock_user_repo.save.assert_not_called()
+
 
  # Test case for registering a user who is already registered
 def test_register_user_already_registered(user_service_instance, mock_user_repo):
