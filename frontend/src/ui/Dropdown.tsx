@@ -43,7 +43,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className={`justify-between border-4 border-darkGreen ${
+        className={`justify-between border-[3px] border-darkGreen font-poppins font-medium ${
           isOpen ? "rounded-b-none" : "rounded-lg"
         } text-darkGreen w-5/6 px-4 py-2 space-x-8 rounded-lg flex items-center bg-transparent`}
       >
@@ -55,11 +55,11 @@ const Dropdown: React.FC<DropdownProps> = ({
         )}
       </button>
       {isOpen && (
-        <ul className="absolute left-0 mt- py-2 w-5/6 bg-white border-t-0 border-4 border-darkGreen max-h-64 overflow-y-auto  rounded-t-none rounded-lg shadow-xl">
+        <ul className="absolute left-0 mt- py-2 w-5/6 bg-white border-t-0 border-[3px] border-darkGreen max-h-64 overflow-y-auto  rounded-t-none rounded-lg shadow-xl">
           {options.map((option, index) => (
             <li
               key={index}
-              className="px-4 py-2 hover:bg-lightGreen hover:text-darkGreen text-darkGreen"
+              className="px-4 py-2 hover:bg-lightGreen hover:text-darkGreen text-darkGreen font-poppins font-medium"
               onClick={() => handleOptionClick(option)}
             >
               {option}

@@ -50,7 +50,7 @@ const EditableDropdown: React.FC<EditableDropdownProps> = ({
     <div className="relative" ref={dropdownRef}>
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="justify-between border-4 border-darkGreenv text-darkGreen px-4 py-2  w-5/6 rounded-lg flex items-center bg-transparent"
+        className="justify-between border-[3px] border-darkGreenv text-darkGreen px-4 py-2  w-5/6 rounded-lg flex items-center bg-transparent font-poppins font-medium"
       >
         Profession
         {isOpen ? (
