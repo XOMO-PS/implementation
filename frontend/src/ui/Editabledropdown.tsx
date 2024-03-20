@@ -3,15 +3,37 @@ import { FaCaretDown, FaMinus } from "react-icons/fa";
 import { Input } from "./Input";
 import { Button } from "./Button";
 
-const EditableDropdown = () => {
+interface WorkExperience {
+  company: string;
+  profession: string;
+  startDate: string;
+  endDate: string;
+}
+
+interface EditableDropdownProps {
+  value: WorkExperience;
+  onChange: (value: WorkExperience) => void;
+}
+
+const EditableDropdown: React.FC<EditableDropdownProps> = ({
+  value,
+  onChange,
+}) => {
   const [isOpen, setIsOpen] = useState(false);
-  //   const [value, setValue] = useState("");
+
+  const handleInputChange = (field: keyof WorkExperience, newValue: string) => {
+    onChange({ ...value, [field]: newValue });
+  };
+
+  const handleSaveClick = () => {
+    setIsOpen(false);
+  };
 
   return (
     <div className="relative">
       <button
         onClick={() => setIsOpen(!isOpen)}
-        className="justify-between border border-blue text-blue px-4 py-2  w-5/6 rounded flex items-center bg-transparent"
+        className="justify-between border-4 border-darkGreenv text-darkGreen px-4 py-2  w-5/6 rounded-lg flex items-center bg-transparent"
       >
         Profession
         {isOpen ? (
@@ -25,33 +47,55 @@ const EditableDropdown = () => {
           <label className="md:flex items-center space-x-2">
             <span>Company:</span>
             <div className="w-30">
-              <Input inputSize="small" placeholder="" />
+              <Input
+                inputSize="small"
+                value={value.company}
+                onChange={(e) => handleInputChange("company", e.target.value)}
+              />
             </div>
           </label>
           <label className="md:flex items-center space-x-2">
             <span>Profession:</span>
             <div className="w-30">
-              <Input inputSize="small" placeholder="" />
+              <Input
+                inputSize="small"
+                value={value.profession}
+                onChange={(e) =>
+                  handleInputChange("profession", e.target.value)
+                }
+              />
             </div>
           </label>
           <div className="md:flex md:space-x-4">
             <label className="md:flex items-center space-x-2">
               <span>Start date:</span>
               <div className="w-30">
-                <Input inputSize="small" placeholder="" />
+                <Input
+                  type="date"
+                  inputSize="small"
+                  value={value.startDate}
+                  onChange={(e) =>
+                    handleInputChange("startDate", e.target.value)
+                  }
+                />
               </div>
             </label>
             <label className="md:flex items-center space-x-3">
               <span>End Date:</span>
               <div className="w-30">
-                <Input inputSize="small" placeholder="" />
+                <Input
+                  type="date"
+                  inputSize="small"
+                  value={value.endDate}
+                  onChange={(e) => handleInputChange("endDate", e.target.value)}
+                />
               </div>
             </label>
           </div>
           <Button
             buttonType={"blue"}
             buttonSize={"small"}
-            onClick={() => setIsOpen(false)}
+            onClick={handleSaveClick}
           >
             Save
           </Button>
