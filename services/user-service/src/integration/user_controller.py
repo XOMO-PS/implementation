@@ -3,7 +3,7 @@ import json
 
 from src.application.user_service import UserService
 from src.integration.model import user
-from src.integration.model import response_config, response
+from src.integration.model import response_config
 
 app = Flask(__name__)
 
@@ -19,9 +19,15 @@ def registration_handler(event, context):
                 new_user = user.User(**request_body)
                 service = UserService()
                 response = service.register_user(user_info=new_user)
-                print("Response: ", response.Response)
+                print("Response Message: ", response.message)
+                print("Response Code: ", response.status_code)
                 if response.status_code == 200:
-                    return jsonify({'message': response.message}), response.status_code
+                    result = {
+                    'statusCode': response.status_code,
+                    'body': json.dumps({response.message})
+                 }
+                    return result
+                    #return jsonify({'message': response.message}), response.status_code
                 else:
                     return jsonify({'error': response.message}), response.status_code
         
