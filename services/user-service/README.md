@@ -1,37 +1,8 @@
 # User Service Deployment Notes
 
-We use Serverless framework for deployment and thus require a serverless.yaml conifguration. The template for user-service is provided here.
-# Template
-````
-service: user-service
-frameworkVersion: '3'
+We use Serverless framework for deployment and thus require a serverless.yaml conifguration. The template for user-service can be found [here](https://github.com/XOMO-PS/implementation/blob/XP-30/services/user-service/serverless.yaml).
 
-package:
-	patterns:
-		- '!.**/**'
-
-provider:
-	name: aws
-	runtime: python3.9
-	region: eu-north-1
-	iamManagedPolicies:
-		- "arn:aws:iam::<<aws-account-id>>:policy/UserServiceReadSecrets"
-
-functions:
-	registration:
-		handler: src.integration.user_controller.registration_handler
-		events:
-			- http:
-				path: user/register
-				method: post
-				integration: lambda-proxy
-				cors: true
-plugins:
-	- serverless-wsgi
-	- serverless-python-requirements
-````
-
-# Deployment Steps
+## Deployment Steps
 #### Install npm on your machine
 `brew install npm`
 
