@@ -13,6 +13,7 @@ module.exports = {
         darkGreen: "#016C81",
         gray: "#E6E6E6",
         lightBlue: "#00C0FD",
+        bgBlue: "#2E99FC",
       },
       fontFamily: {
         poppins: ["Poppins"],
