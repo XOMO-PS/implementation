@@ -2,9 +2,10 @@ import React, { useState } from "react";
 import Dropdown from "../ui/Dropdown";
 import EditableDropdown from "../ui/Editabledropdown";
 import { Button } from "../ui/Button";
-import FileUpload from "../ui/Fileupload";
+// import FileUpload from "../ui/Fileupload";
 import { FaPlus } from "react-icons/fa";
 import { getIconType } from "../utils/getIconType";
+import { useLocation } from "react-router-dom";
 
 interface WorkExperience {
   company: string;
@@ -14,6 +15,8 @@ interface WorkExperience {
 }
 
 export function ProviderSignup() {
+  const location = useLocation();
+  const formData1 = location.state ? location.state.formData : {};
   const [bio, setBio] = useState("");
   const [workExperience, setWorkExperience] = useState<WorkExperience[]>([
     {
@@ -24,7 +27,7 @@ export function ProviderSignup() {
     },
   ]);
   const [profession, setProfession] = useState("");
-  const [uploadedFile, setUploadedFile] = useState<File | null>(null);
+  // const [uploadedFile, setUploadedFile] = useState<File | null>(null);
   const handleDelete = (index: number) => {
     setWorkExperience((prevWorkExperience) =>
       prevWorkExperience.filter((_, i) => i !== index)
@@ -46,16 +49,49 @@ export function ProviderSignup() {
     }
   };
   const handleSubmit = () => {
-    const formData = {
-      workExperience,
-      profession,
-      uploadedFile,
-    };
+    if (formData1) {
+      const formData = {
+        // workExperience,
+        first_name: formData1.first_name,
+        last_name: formData1.last_name,
+        email: formData1.email,
+        password: formData1.password,
+        profile_info: {
+          expertise: profession,
+        },
+        // uploadedFile,
+      };
+      callAPI(formData);
+    }
 
-    console.log(formData);
+    // console.log(
+    //   "final" +
+    //     formData["first_name"] +
+    //     formData["last_name"] +
+    //     formData["email"]
+    // );
   };
+
+  function callAPI(formData: any) {
+    fetch(
+      "https://4tlf1crmpf.execute-api.eu-north-1.amazonaws.com/V1/register-provider",
+      {
+        method: "POST", // or 'PUT'
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      }
+    )
+      .then((response) => response.json())
+      .then((data) => console.log(data))
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }
+
   return (
-    <div className="flex flex-col min-h-screen bg-blue justify-center items-center p-8">
+    <div className="flex flex-col min-h-screen bg-blue  items-center p-8">
       <p className="text-4xl text-white mb-8 self-start font-quicksand font-semibold">
         XOMO
       </p>
@@ -111,7 +147,7 @@ export function ProviderSignup() {
             ))}
           </div>
         </div>
-        <div className="col-span-2 grid-rows-2 gap-4 items-start p-10">
+        <div className="col-span-2 grid-rows-2 justify-between gap-4 items-start p-10">
           <div className="mb-8">
             <h2 className="font-poppins text-2xl text-darkGreen font-bold mb-8">
               Select your profession
@@ -133,23 +169,25 @@ export function ProviderSignup() {
               value={profession}
               onChange={setProfession}
             />
-          </div>
-          <h2 className="font-poppins text-2xl text-darkGreen font-bold mb-8">
+            {/* <h2 className="font-poppins text-2xl text-darkGreen font-bold mb-8">
             Let us verify you
           </h2>
           <h3 className="font-poppins text-base text-black mb-8">
             Upload a pdf of your identification document, either national ID or
             passport
-          </h3>
+          </h3> */}
 
-          <FileUpload onFileUpload={setUploadedFile} />
-          <Button
-            buttonType={"green"}
-            buttonSize={"large"}
-            onClick={handleSubmit}
-          >
-            Submit
-          </Button>
+            {/* <FileUpload onFileUpload={setUploadedFile} /> */}
+            <div className="md: mt-24 mt:10">
+              <Button
+                buttonType={"green"}
+                buttonSize={"large"}
+                onClick={handleSubmit}
+              >
+                Submit
+              </Button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
