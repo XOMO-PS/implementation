@@ -23,6 +23,16 @@ functions:
             integration: lambda-proxy
             cors: true
 
+    sign_in:
+      handler: src.integration.user_controller.sign_in
+        events:
+          - http:
+              path: user/sign_in
+              method: post
+              integration: lambda-proxy
+              cors: true
+
+
 plugins:
   - serverless-wsgi
   - serverless-python-requirements
