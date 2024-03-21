@@ -18,8 +18,11 @@ export default function SearchService() {
     // };
 
     return <>
-    <div className='rounded-lg p-8'>
-        <div className=''>
+    <div className='flex flex-col min-h-screen bg-blue justify-center items-center p-8'>
+    <p className="text-4xl text-white mb-8 self-start font-quicksand font-semibold">
+        XOMO
+      </p>
+        <div className='gap-4 bg-white rounded-2xl lg:p-4'>
             <nav className="flex items-center justify-between flex-wrap bg-blue p-4 rounded-full">
                 <div className="flex items-center flex-shrink-0 text-white mr-6">
                     <span className="font-semibold text-xl tracking-tight">XOMO</span>
