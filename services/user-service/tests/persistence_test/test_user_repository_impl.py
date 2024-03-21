@@ -24,3 +24,16 @@ def test_save_user(mock_session, user_repo):
 
     mock_session.add.assert_called_once_with(user)
     mock_session.commit.assert_called_once()
+
+
+def test_find_user_id_by_email(mock_session, user_repo):
+    user = MagicMock(spec=storage_user)
+    user.email = "test@example.com"
+    mock_session.query.return_value.filter_by.return_value.scalar.return_value = 12345
+
+    result = user_repo.find_user_id_by_email(user.email)
+
+    mock_session.query.return_value.filter_by.assert_called_once_with(email=user.email)
+    mock_session.query.return_value.filter_by.return_value.scalar.assert_called_once()
+
+    assert result == 12345

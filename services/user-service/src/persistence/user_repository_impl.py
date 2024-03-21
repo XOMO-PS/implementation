@@ -24,13 +24,18 @@ class UserRepositoryImpl:
         session.commit()
         session.close()
 
-    def find_user_by_email(self, email:str):
+    def find_user_id_by_email(self, email:str):
         session = self.Session()
         try:
             user = session.query(storage_user.StorageUser.user_id).filter_by(email=email).scalar()
             return user
         finally:
             session.close()
-
-    def find_user(self, user_info:storage_user):
-        print("Implement me!") 
+    
+    def find_user_by_email(self, email:str) -> storage_user.StorageUser:
+        session = self.Session()
+        try:
+            user = session.query(storage_user.StorageUser).filter_by(email=email).first()
+            return user
+        finally:
+            session.close()

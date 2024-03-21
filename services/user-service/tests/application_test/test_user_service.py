@@ -9,6 +9,7 @@ from integration.model import response_config
 # Define mocked user info
 mock_user_info_complete = user.User(email="test@example.com", password_hash="hashed_password", first_name="John", last_name="Doe", type="user")
 mock_user_info_incomplete = user.User(email="", password_hash="", first_name="", last_name="", type="user")
+user_id_to_mock = 12345
 
 @pytest.fixture
 def mock_user_repo():
@@ -34,7 +35,7 @@ def user_service_instance(mock_user_repo):
 # Test case for registering a user with complete information
 def test_register_user_complete_info(user_service_instance, mock_user_repo):
     # Mock is_user_registered to return False
-    mock_user_repo.find_user_by_email.return_value = None
+    mock_user_repo.find_user_id_by_email.return_value = None
 
     response = user_service_instance.register_user(mock_user_info_complete)
 
@@ -56,7 +57,7 @@ def test_register_user_incomplete_info(user_service_instance, mock_user_repo):
  # Test case for registering a user who is already registered
 def test_register_user_already_registered(user_service_instance, mock_user_repo):
     # Mock is_user_registered to return True
-    mock_user_repo.find_user_by_email.return_value = mock_user_info_complete
+    mock_user_repo.find_user_id_by_email.return_value = user_id_to_mock
 
     response = user_service_instance.register_user(mock_user_info_complete)
 
