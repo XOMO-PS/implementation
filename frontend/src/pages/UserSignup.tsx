@@ -22,11 +22,10 @@ export function UserSignup() {
     validateAllFields();
     if (isFormValid()) {
       const formData = {
-        firstName,
-        lastName,
-        email,
-        password,
-        confirmPassword,
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        password: password,
       };
       console.log(formData);
 

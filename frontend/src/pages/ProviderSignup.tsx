@@ -49,21 +49,30 @@ export function ProviderSignup() {
     }
   };
   const handleSubmit = () => {
-    const formData = {
-      workExperience,
-      profession,
-      // uploadedFile,
-    };
+    if (formData1) {
+      const formData = {
+        // workExperience,
+        first_name: formData1.first_name,
+        last_name: formData1.last_name,
+        email: formData1.email,
+        password: formData1.password,
+        profile_info: {
+          expertise: profession,
+        },
+        // uploadedFile,
+      };
+      callAPI(formData);
+    }
 
-    console.log(formData);
-    callAPI(formData);
+    // console.log(
+    //   "final" +
+    //     formData["first_name"] +
+    //     formData["last_name"] +
+    //     formData["email"]
+    // );
   };
 
   function callAPI(formData: any) {
-    const combinedFormData = {
-      ...formData1,
-      ...formData,
-    };
     fetch(
       "https://4tlf1crmpf.execute-api.eu-north-1.amazonaws.com/V1/register-provider",
       {
@@ -71,7 +80,7 @@ export function ProviderSignup() {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(combinedFormData),
+        body: JSON.stringify(formData),
       }
     )
       .then((response) => response.json())
