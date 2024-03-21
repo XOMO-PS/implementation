@@ -22,13 +22,11 @@ class UserService:
 
     def register_user(self, user_info: user) -> response:
         if self.is_user_info_incomplete(user_info):
-           print("User info not complete")
            return response_config.USER_INFO_INCOMPLETE
         
         if not self.is_user_registered(user_info.email):
             print("Registering new user")
             self.user_repo.save(self.user_factory.map_user_to_storage(user_info))
-            print("User registered.")
             return response_config.USER_SUCCESSFULLY_REGISTERED
         else:
             print("User already exists")

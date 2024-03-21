@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask
 import json
 
 from src.application.user_service import UserService
@@ -18,12 +18,12 @@ def registration_handler(event, context):
                 return jsonize(service.register_user(user_info=new_user))
         
             except Exception as e:
-                print("fell in block")
                 error_message = str(e)
                 operation_error = {
                     'statusCode': 500,
                     'body': json.dumps({'error': f'{error_message}'})
                  }
+                print(operation_error)
                 return operation_error
     
         else:
