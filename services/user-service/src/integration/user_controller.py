@@ -3,7 +3,7 @@ import json
 
 from src.application.user_service import UserService
 from src.integration.model import user
-from src.integration.model import response_config
+from src.integration.model import response_config, response
 
 app = Flask(__name__)
 
@@ -15,21 +15,24 @@ def registration_handler(event, context):
             try:
                 new_user = user.User(**request_body)
                 service = UserService()
-                response = service.register_user(user_info=new_user)
-                result = {
-                'statusCode': response.status_code,
-                'body': json.dumps({'message': response.message})
-                }
-                return jsonify({'message': 'Blah blah'}), 201
+                return jsonize(service.register_user(user_info=new_user))
         
             except Exception as e:
-                print("Exception occurred: ", str(e))
+                print("fell in block")
                 error_message = str(e)
                 operation_error = {
                     'statusCode': 500,
-                    'body': json.dumps({'error': f'Exception occurred: {error_message}'})
+                    'body': json.dumps({'error': f'{error_message}'})
                  }
                 return operation_error
     
         else:
-            return jsonify({'error': response_config.INVALID_REQUEST.message}), 409
+            return jsonize(response_config.INVALID_REQUEST)
+
+
+def jsonize(result: response) -> json:
+    result = {
+                'statusCode': response.status_code,
+                'body': json.dumps({'message': response.message})
+            }
+    return result

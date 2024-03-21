@@ -10,8 +10,9 @@ class UserService:
         self.user_repo = user_repo or user_repository_impl.UserRepositoryImpl()
         self.user_factory = user_factory.UserFactory()
     
+
     def is_user_info_incomplete(self, user_info:user) -> bool:
-        return not user_info.email and not user_info.password_hash and not user_info.first_name and not user_info.last_name
+        return not user_info.email or not user_info.password_hash or not user_info.first_name or not user_info.last_name or not user_info.type
 
 
     def is_user_registered(self, email: str) -> bool:
@@ -21,6 +22,7 @@ class UserService:
 
     def register_user(self, user_info: user) -> response:
         if self.is_user_info_incomplete(user_info):
+           print("User info not complete")
            return response_config.USER_INFO_INCOMPLETE
         
         if not self.is_user_registered(user_info.email):
