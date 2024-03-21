@@ -10,6 +10,8 @@ provider:
   name: aws
   runtime: python3.9
   region: eu-north-1
+  iamManagedPolicies:
+    - "arn:aws:iam::381492106198:policy/UserServiceReadSecrets"
 
 functions:
    registration:
@@ -24,8 +26,3 @@ functions:
 plugins:
   - serverless-wsgi
   - serverless-python-requirements
-
-# custom:
-#   pythonRequirements:
-#      dockerizePip: false
-#      zip: true

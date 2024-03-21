@@ -6,17 +6,17 @@ Base = declarative_base()
 
 class StorageUser(Base):
 
-   __tablename__ = 'user'
+   __tablename__ = 'users'
 
-   id = Column(Integer, primary_key=True)
+   user_id = Column(Integer, primary_key=True)
 
-   firstName = Column(String)
-   lastName = Column(String)
+   first_name = Column(String)
+   last_name = Column(String)
    email = Column(String)
    type = Column(String)
-   passwordHash = Column(String)
-   streetName = Column(String)
+   password_hash = Column(String)
+   street_name = Column(String)
    house = Column(String)
-   postalCode = Column(String)
+   postal_code = Column(String)
    city = Column(String)
    country = Column(String)

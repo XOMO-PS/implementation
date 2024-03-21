@@ -11,14 +11,15 @@ Base = declarative_base()
 class UserRepositoryImpl:
 
     def __init__(self, engine=None, session_factory=None):
-        uri = AppConfig().get_mysql_uri
-        self.engine = engine or create_engine(uri)
+        config = AppConfig()
+        self.engine = engine or create_engine(config.get_uri())
         Base.metadata.create_all(self.engine)
         self.Session = session_factory or sessionmaker(bind=self.engine)
 
 
     def save(self, new_user:storage_user):
         session = self.Session()
+        print("Adding user to Database")
         session.add(new_user)
         session.commit()
         session.close()
@@ -26,11 +27,11 @@ class UserRepositoryImpl:
     def find_user_by_email(self, email:str):
         session = self.Session()
         try:
-            user = session.query(storage_user.StorageUser).filter_by(email=email).first()
+            user = session.query(storage_user.StorageUser.user_id).filter_by(email=email).scalar()
             return user
         finally:
             session.close()
 
 
-    def find_user(self, userInfo:storage_user):
+    def find_user(self, user_info:storage_user):
         print("Implement me!") 

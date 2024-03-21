@@ -21,3 +21,14 @@
 **npm-debug.log*
 **yarn-debug.log*
 **yarn-error.log*
+package-lock.json
+services/user-service/.requirements.zip
+services/user-service/AWSCLIV2.pkg
+services/user-service/.serverless/cloudformation-template-create-stack.json
+services/user-service/.serverless/cloudformation-template-update-stack.json
+services/user-service/.serverless/requirements
+services/user-service/.serverless/requirements.txt
+services/user-service/.serverless/serverless-state.json
+services/user-service/.serverless/user-service.zip
+services/user-service/.vscode/settings.json
+services/user-service/src/integration/__pycache__/user_controller.cpython-312.pyc

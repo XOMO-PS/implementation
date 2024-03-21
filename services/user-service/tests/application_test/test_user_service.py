@@ -7,8 +7,8 @@ from persistence import user_repository_impl
 from integration.model import response_config
 
 # Define mocked user info
-mock_user_info_complete = user.User(email="test@example.com", passwordHash="hashed_password", firstName="John", lastName="Doe", type="user")
-mock_user_info_incomplete = user.User(email="", passwordHash="", firstName="", lastName="", type="user")
+mock_user_info_complete = user.User(email="test@example.com", password_hash="hashed_password", first_name="John", last_name="Doe", type="user")
+mock_user_info_incomplete = user.User(email="", password_hash="", first_name="", last_name="", type="user")
 
 @pytest.fixture
 def mock_user_repo():
@@ -38,7 +38,8 @@ def test_register_user_complete_info(user_service_instance, mock_user_repo):
 
     response = user_service_instance.register_user(mock_user_info_complete)
 
-    assert response == response_config.USER_SUCCESSFULLY_REGISTERED
+    assert response.message == response_config.USER_SUCCESSFULLY_REGISTERED.message
+    assert response.status_code == response_config.USER_SUCCESSFULLY_REGISTERED.status_code
 
 
 # Test case for registering a user with incomplete information
@@ -46,7 +47,8 @@ def test_register_user_incomplete_info(user_service_instance, mock_user_repo):
 
     response = user_service_instance.register_user(mock_user_info_incomplete)
 
-    assert response == response_config.USER_INFO_INCOMPLETE
+    assert response.message == response_config.USER_INFO_INCOMPLETE.message
+    assert response.status_code == response_config.USER_INFO_INCOMPLETE.status_code
 
     mock_user_repo.save.assert_not_called()
 
@@ -58,6 +60,7 @@ def test_register_user_already_registered(user_service_instance, mock_user_repo)
 
     response = user_service_instance.register_user(mock_user_info_complete)
 
-    assert response == response_config.USER_ALREADY_REGISTERED
+    assert response.message == response_config.USER_ALREADY_REGISTERED.message
+    assert response.status_code == response_config.USER_ALREADY_REGISTERED.status_code
 
     mock_user_repo.save.assert_not_called()   

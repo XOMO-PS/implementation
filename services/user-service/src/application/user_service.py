@@ -7,12 +7,12 @@ from src.integration.model import response
 class UserService:
 
     def __init__(self, user_repo=None):
-        print("using repo:", user_repo)
         self.user_repo = user_repo or user_repository_impl.UserRepositoryImpl()
         self.user_factory = user_factory.UserFactory()
     
+
     def is_user_info_incomplete(self, user_info:user) -> bool:
-        return not user_info.email and not user_info.passwordHash and not user_info.firstName and not user_info.lastName
+        return not user_info.email or not user_info.password_hash or not user_info.first_name or not user_info.last_name or not user_info.type
 
 
     def is_user_registered(self, email: str) -> bool:
@@ -25,9 +25,11 @@ class UserService:
            return response_config.USER_INFO_INCOMPLETE
         
         if not self.is_user_registered(user_info.email):
+            print("Registering new user")
             self.user_repo.save(self.user_factory.map_user_to_storage(user_info))
             return response_config.USER_SUCCESSFULLY_REGISTERED
         else:
+            print("User already exists")
             return response_config.USER_ALREADY_REGISTERED
 
 

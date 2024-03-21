@@ -1,26 +1,38 @@
-from flask import jsonify
+from flask import Flask
 import json
 
-from src.application import user_service
+from src.application.user_service import UserService
 from src.integration.model import user
-from src.integration.model import response_config
+from src.integration.model import response_config, response
+
+app = Flask(__name__)
 
 def registration_handler(event, context):
 
-    if 'body' in event and event['body']:
-        request_body = json.loads(event['body'])
+    with app.app_context():
+        if 'body' in event and event['body']:
+            request_body = json.loads(event['body'])            
+            try:
+                new_user = user.User(**request_body)
+                service = UserService()
+                return jsonize(service.register_user(user_info=new_user))
         
-        try:
-            new_user = user.User(**request_body)
-            user_service.register_user(new_user)
-            return jsonify({'status': response_config.USER_SUCCESSFULLY_REGISTERED.message}), response_config.USER_SUCCESSFULLY_REGISTERED.status_code
+            except Exception as e:
+                error_message = str(e)
+                operation_error = {
+                    'statusCode': 500,
+                    'body': json.dumps({'error': f'{error_message}'})
+                 }
+                print(operation_error)
+                return operation_error
     
-        except Exception as e:
-            error_message = str(e)
-            if error_message == response_config.USER_ALREADY_REGISTERED.message:
-                return jsonify({'error': error_message}), response_config.USER_ALREADY_REGISTERED.status_code
-            else:
-                return jsonify({'error': error_message}), response_config.REGISTRATION_FAILED.status_code
-  
-    else:
-        return response_config.INVALID_REQUEST.status_code
+        else:
+            return jsonize(response_config.INVALID_REQUEST)
+
+
+def jsonize(result: response) -> json:
+    result = {
+                'statusCode': response.status_code,
+                'body': json.dumps({'message': response.message})
+            }
+    return result
