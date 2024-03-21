@@ -63,13 +63,6 @@ export function ProviderSignup() {
       };
       callAPI(formData);
     }
-
-    // console.log(
-    //   "final" +
-    //     formData["first_name"] +
-    //     formData["last_name"] +
-    //     formData["email"]
-    // );
   };
 
   function callAPI(formData: any) {
@@ -84,7 +77,10 @@ export function ProviderSignup() {
       }
     )
       .then((response) => response.json())
-      .then((data) => console.log(data))
+      .then((data) => {
+        alert("Successfully registered");
+        console.log(data);
+      })
       .catch((error) => {
         console.error("Error:", error);
       });
