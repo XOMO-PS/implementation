@@ -1,8 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { FaRegUser, FaUserNurse } from "react-icons/fa";
+import { useLocation } from "react-router-dom";
 
 export function SignupChoose() {
+  const location = useLocation();
+  const formData = location.state ? location.state.formData : {};
+
   return (
     <div className="min-h-screen bg-blue justify-start items-center p-8">
       <header className="text-3xl font-bold text-white mb-32 self-start">
@@ -10,7 +14,15 @@ export function SignupChoose() {
       </header>
 
       <div className="flex justify-center space-x-8">
-        <Link to="/providerSignup" className="text-decoration-none">
+        <Link
+          to={
+            { pathname: "/providerSignup", state: { formData } } as {
+              pathname: string;
+              state: any;
+            }
+          }
+          className="text-decoration-none"
+        >
           <div className="bg-white rounded-3xl p-8 w-80 flex flex-col items-center justify-center">
             <FaUserNurse className="w-32 h-32 mb-4 text-red" />
             <h1 className="font-poppins text-base text-red font-bold">

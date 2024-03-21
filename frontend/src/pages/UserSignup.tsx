@@ -2,6 +2,7 @@ import React from "react";
 import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export function UserSignup() {
   const [firstName, setFirstName] = useState("");
@@ -15,6 +16,7 @@ export function UserSignup() {
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+  const navigate = useNavigate();
 
   const handleSubmit = () => {
     validateAllFields();
@@ -27,6 +29,8 @@ export function UserSignup() {
         confirmPassword,
       };
       console.log(formData);
+
+      navigate("/signupChoose", { state: { formData } });
     }
   };
 
