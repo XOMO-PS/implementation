@@ -9,21 +9,9 @@ export function SignupChoose() {
 
   const location = useLocation();
   const formData = location.state ? location.state.formData : {};
-  const formData2 = {
-    first_name: formData["first_name"],
-    last_name: formData["last_name"],
-    email: formData["email"],
-    password: formData["password"],
-  };
-  console.log(
-    "inter choce" +
-      formData2["email"] +
-      formData2["password"] +
-      formData2["first_name"] +
-      formData2["last_name"]
-  );
+
   const handleProviderSignup = () => {
-    navigate("/providerSignup", { state: { formData2 } });
+    navigate("/providerSignup", { state: { formData } });
   };
   return (
     <div className="min-h-screen bg-bgBlue justify-start items-center p-8">
