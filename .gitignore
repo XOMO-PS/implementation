@@ -29,3 +29,5 @@ services/user-service/.serverless/**
 services/user-service/.vscode/settings.json
 package.json
 package-lock.json
+
+.venv/**

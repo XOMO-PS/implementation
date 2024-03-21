@@ -13,3 +13,16 @@ class User:
    postal_code: Optional[str] = None
    city: Optional[str] = None
    country: Optional[str] = None
+
+   # Added Constructor
+   def __init__(self, firstName: str, lastName: str, email: str, type: str, passwordHash: str, streetName: Optional[str] = None, house: Optional[str] = None, postalCode: Optional[str] = None, city: Optional[str] = None, country: Optional[str] = None):
+        self.firstName = firstName
+        self.lastName = lastName
+        self.email = email
+        self.type = type
+        self.passwordHash = passwordHash
+        self.streetName = streetName
+        self.house = house
+        self.postalCode = postalCode
+        self.city = city
+        self.country = country
