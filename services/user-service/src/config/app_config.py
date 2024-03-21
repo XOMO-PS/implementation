@@ -24,11 +24,11 @@ class AppConfig:
         return secret
 
 
-    def create_mysql_uri(self, username, password, hostname, port, dbname='user'):
-        return f"mysql://{username}:{password}@{hostname}:@{port}/{dbname}"
+    def create_psql_uri(self, username, password, hostname, port, dbname='xomops'):
+        return f"postgresql+pg8000://{username}:{password}@{hostname}:{port}/{dbname}"
 
 
-    def get_mysql_uri(self, secret_name='user-service'):
+    def get_uri(self, secret_name='user-service'):
         secret_values = self.get_secret(secret_name)
         if secret_values:
             secrets = json.loads(secret_values)
@@ -36,6 +36,7 @@ class AppConfig:
             password = secrets.get('password', '')
             hostname = secrets.get('hostname', '')
             port     = secrets.get('port', '')
-            return self.create_mysql_uri(username, password, hostname, port)
+            print("Fetched all necessary secrets")
+            return self.create_psql_uri(username, password, hostname, port)
         else:
             return None

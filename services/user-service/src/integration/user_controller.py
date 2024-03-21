@@ -1,26 +1,39 @@
-from flask import jsonify
+from flask import Flask, jsonify
 import json
 
-from src.application import user_service
+from src.application.user_service import UserService
 from src.integration.model import user
-from src.integration.model import response_config
+from src.integration.model import response_config, response
+
+app = Flask(__name__)
 
 def registration_handler(event, context):
 
-    if 'body' in event and event['body']:
-        request_body = json.loads(event['body'])
+    with app.app_context():
+        if 'body' in event and event['body']:
+            print("Body: ", event['body'])
+            request_body = json.loads(event['body'])
+            print("Json body: ", request_body)
+            
+            try:
+                new_user = user.User(**request_body)
+                service = UserService()
+                response = service.register_user(user_info=new_user)
+                print("Response: ", response.Response)
+                if response.status_code == 200:
+                    return jsonify({'message': response.message}), response.status_code
+                else:
+                    return jsonify({'error': response.message}), response.status_code
         
-        try:
-            new_user = user.User(**request_body)
-            user_service.register_user(new_user)
-            return jsonify({'status': response_config.USER_SUCCESSFULLY_REGISTERED.message}), response_config.USER_SUCCESSFULLY_REGISTERED.status_code
+            except Exception as e:
+                print("Exception occurred: ", str(e))
+                error_message = str(e)
+                operation_error = {
+                    'statusCode': 500,
+                    'body': json.dumps({'error': f'Exception occurred: {error_message}'})
+                 }
+                return operation_error
+                #return jsonify({'error': str(e)}), 500
     
-        except Exception as e:
-            error_message = str(e)
-            if error_message == response_config.USER_ALREADY_REGISTERED.message:
-                return jsonify({'error': error_message}), response_config.USER_ALREADY_REGISTERED.status_code
-            else:
-                return jsonify({'error': error_message}), response_config.REGISTRATION_FAILED.status_code
-  
-    else:
-        return response_config.INVALID_REQUEST.status_code
+        else:
+            return jsonify({'error': response_config.INVALID_REQUEST.message}), 409

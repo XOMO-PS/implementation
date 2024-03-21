@@ -3,13 +3,13 @@ from typing import Optional
 
 @dataclass
 class User:
-   firstName: str
-   lastName: str
+   first_name: str
+   last_name: str
    email: str
    type: str
-   passwordHash: str
-   streetName: Optional[str] = None
+   password_hash: str
+   street_name: Optional[str] = None
    house: Optional[str] = None
-   postalCode: Optional[str] = None
+   postal_code: Optional[str] = None
    city: Optional[str] = None
    country: Optional[str] = None
