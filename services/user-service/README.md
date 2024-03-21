@@ -1,6 +1,14 @@
 # User Service Deployment Notes
 
-We use Serverless framework for deployment and thus require a serverless.yaml conifguration. The template for user-service can be found [here](https://github.com/XOMO-PS/implementation/blob/XP-30/services/user-service/serverless.yaml).
+We use Serverless framework for deployment and thus require a serverless.yaml conifguration. The configuration for user-service can be found [here](https://github.com/XOMO-PS/implementation/blob/main/services/user-service/serverless.yaml).
+This can be adapted for other service(s).
+
+## AWS SecretsManager
+We have stored Database credentials in [SecretsManager](https://eu-north-1.console.aws.amazon.com/secretsmanager/listsecrets?region=eu-north-1).
+
+To read these secrets, we have created an [IAM Policy](https://us-east-1.console.aws.amazon.com/iam/home?region=eu-north-1#/policies/details/arn%3Aaws%3Aiam%3A%3A381492106198%3Apolicy%2FUserServiceReadSecrets?section=permissions)
+
+The policy ARN is to be specied in [serverless.yaml](https://github.com/XOMO-PS/implementation/blob/main/services/user-service/serverless.yaml#L13)
 
 ## Deployment Steps
 #### Install npm on your machine
