@@ -13,12 +13,15 @@ Follow the official guid from VS:
 	Add .venv to .gitignore, so that you don't commit this directory to repository.
 	
 NOTE: If your are working on user-service, ensure that your .venv is created under user-service directory.
+
 ### Add your python code
 Now you are free to add necessary python code. Make sure you follow along the existing package structure and coding standards, to maintain consistency.
+
 #### Food for thought
 The goal during development of user-service is to follow the concepts of Domain Driven Design and Clean Architecture principles. 
 This is visible starting with the package structure explained here https://miro.com/app/board/uXjVNWEdOSY=/?moveToWidget=3458764582560284120&cot=14
 This way responsibilities are contained closely and there's clear separation of concerns in each layer.
+
 #### Code Structure of user-service
 1. The entry point into this service is at **src/integration/user_controller.py**
 2. Necessary Lambda functions for user login and register can be found in here.
@@ -50,8 +53,10 @@ Refer the existing structure in test directory and test class, before you add ne
 ### Connecting to SQL 
 We are using Postgress as Relation Database tech. Follow the steps for access via CLI.
 1. Install psql on your machine: `brew install libpq`
-2. Connect to DB: `psql -h ec2-44-220-151-238.compute-1.amazonaws.com -U xomops -d xomops`
+2. Connect to DB: `psql -h XXX.compute-1.amazonaws.com -U <username> -d <password>`
 3. When prompted for password, add the password.
 4. Once you are connected, you can list tables(`/dt`)  and other PSQL commands.
+
 ### Deploying your Lambda to AWS
  Follow the DeploymentNotes.md in the user-service.
+
