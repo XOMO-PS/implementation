@@ -14,6 +14,8 @@ module.exports = {
         gray: "#E6E6E6",
         lightBlue: "#00C0FD",
         bgBlue: "#2E99FC",
+        transparentBlue: "#D1E9FF",
+        sharpBlue: "#1570EF",
       },
       fontFamily: {
         poppins: ["Poppins"],
