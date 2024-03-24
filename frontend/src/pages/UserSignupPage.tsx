@@ -182,12 +182,12 @@ export function UserSignupPage() {
       <p className="text-4xl text-white self-start font-quicksand font-semibold ml-12 mt-10">
         XOMO
       </p>
-      <div className="w-[1000px] bg-white flex flex-col mx-auto rounded-[64px] mt-8 mb-8">
+      <div className="bg-white flex flex-col mx-auto rounded-[64px] mt-8 mb-8">
         <p className="font-poppins font-semibold text-darkGreen text-center text-2xl mt-8">
           Create an account
         </p>
-        <div className="flex flex-col px-48">
-          <div className="flex flex-row mt-8 justify-center">
+        <div className="flex flex-col px-12 md:px-16 lg:px-32">
+          <div className="flex md:flex-row flex-col mt-8 justify-center">
             <div className="w-72">
               <Input
                 inputSize="small"
@@ -198,7 +198,7 @@ export function UserSignupPage() {
               />
               {firstNameError && <p className="text-red">{firstNameError}</p>}
             </div>
-            <div className="w-72 ml-9">
+            <div className="w-72 md:ml-9 mt-4 md:mt-0">
               <Input
                 inputSize="small"
                 leftIcon={"user"}
@@ -209,7 +209,7 @@ export function UserSignupPage() {
               {lastNameError && <p className="text-red">{lastNameError}</p>}
             </div>
           </div>
-          <div className="flex flex-row mt-4 justify-center">
+          <div className="flex flex-row mt-4 justify-center md:flex-row flex-col">
             <div className="w-72">
               <Input
                 inputSize="small"
@@ -220,7 +220,7 @@ export function UserSignupPage() {
               />
               {emailError && <p className="text-red">{emailError}</p>}
             </div>
-            <div className="w-72 ml-9">
+            <div className="w-72 md:ml-9 mt-4 md:mt-0">
               <Input
                 inputSize="small"
                 leftIcon={"phone"}
@@ -231,7 +231,7 @@ export function UserSignupPage() {
               {phoneError && <p className="text-red">{phoneError}</p>}
             </div>
           </div>
-          <div className="flex flex-row mt-4 justify-center">
+          <div className="flex flex-row mt-4 justify-center md:flex-row flex-col">
             <div className="w-72">
               <Input
                 inputSize="small"
@@ -245,7 +245,7 @@ export function UserSignupPage() {
               />
               {passwordError && <p className="text-red">{passwordError}</p>}
             </div>
-            <div className="w-72 ml-9">
+            <div className="w-72 md:ml-9 mt-4 md:mt-0">
               <Input
                 inputSize="small"
                 leftIcon={"password"}
@@ -267,7 +267,7 @@ export function UserSignupPage() {
             Address
           </p>
           <div className="outline outline-1 outline-darkGreen"></div>
-          <div className="flex flex-row mt-8 justify-center">
+          <div className="flex md:flex-row flex-col mt-8 justify-center">
             <div className="w-60">
               <Input
                 inputSize="small"
@@ -278,7 +278,7 @@ export function UserSignupPage() {
               />
               {streetError && <p className="text-red">{streetError}</p>}
             </div>
-            <div className="w-44 ml-4">
+            <div className="w-44 md:ml-4 mt-4 md:mt-0">
               <Input
                 inputSize="small"
                 leftIcon={"house"}
@@ -288,7 +288,7 @@ export function UserSignupPage() {
               />
               {houseNoError && <p className="text-red">{houseNoError}</p>}
             </div>
-            <div className="w-36 ml-4">
+            <div className="w-36 md:ml-4 mt-4 md:mt-0">
               <Input
                 inputSize="small"
                 leftIcon={"email"}
@@ -299,7 +299,7 @@ export function UserSignupPage() {
               {postalError && <p className="text-red">{postalError}</p>}
             </div>
           </div>
-          <div className="flex flex-row mt-5 justify-center">
+          <div className="flex md:flex-row flex-col md:ml-9 mt-4 md:mt-5 justify-center">
             <div className="w-64">
               <Input
                 inputSize="small"
@@ -310,7 +310,7 @@ export function UserSignupPage() {
               />
               {cityError && <p className="text-red">{cityError}</p>}
             </div>
-            <div className="w-64 ml-4">
+            <div className="w-64 md:ml-4 mt-4 md:mt-0">
               <Input
                 inputSize="small"
                 leftIcon={"flag"}
