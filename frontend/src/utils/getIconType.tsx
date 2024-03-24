@@ -5,8 +5,15 @@ import {
   FaLock,
   FaMinus,
   FaRegUser,
+  FaMapMarkedAlt,
+  FaCity,
+  FaFacebook,
 } from "react-icons/fa";
+import { FcGoogle } from "react-icons/fc";
+import { FaHouse, FaFlag } from "react-icons/fa6";
+import { CiLock } from "react-icons/ci";
 import { GrUploadOption } from "react-icons/gr";
+
 import { MdOutlineDeleteForever, MdOutlineMail } from "react-icons/md";
 import { MdLocalPhone } from "react-icons/md";
 import { TiTick } from "react-icons/ti";
@@ -23,7 +30,14 @@ export type IconType =
   | "upload"
   | "dropdown"
   | "dropup"
-  | "trash";
+  | "trash"
+  | "password"
+  | "house"
+  | "map"
+  | "city"
+  | "flag"
+  | "google"
+  | "facebook";
 
 export function getIconType(iconType: IconType) {
   const iconStyle = "absolute";
@@ -93,6 +107,48 @@ export function getIconType(iconType: IconType) {
       return (
         <div className={iconStyle}>
           <MdOutlineDeleteForever className="w-9 h-9" />
+        </div>
+      );
+    case "password":
+      return (
+        <div className={iconStyle}>
+          <CiLock className="w-6 h-6" />
+        </div>
+      );
+    case "house":
+      return (
+        <div className={iconStyle}>
+          <FaHouse className="w-5 h-5" />
+        </div>
+      );
+    case "map":
+      return (
+        <div className={iconStyle}>
+          <FaMapMarkedAlt className="w-5 h-5" />
+        </div>
+      );
+    case "city":
+      return (
+        <div className={iconStyle}>
+          <FaCity className="w-5 h-5" />
+        </div>
+      );
+    case "flag":
+      return (
+        <div className={iconStyle}>
+          <FaFlag className="w-5 h-5" />
+        </div>
+      );
+    case "google":
+      return (
+        <div className={iconStyle}>
+          <FcGoogle className="w-5 h-5" />
+        </div>
+      );
+    case "facebook":
+      return (
+        <div className={iconStyle}>
+          <FaFacebook className="w-4 h-4" />
         </div>
       );
     default:

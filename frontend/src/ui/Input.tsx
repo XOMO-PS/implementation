@@ -6,11 +6,13 @@ interface InputProps extends ComponentPropsWithoutRef<"input"> {
   inputSize?: InputSize;
   leftIcon?: IconType;
   rightIcon?: IconType;
+  onClickToIcon?: () => void;
 }
 export function Input({
   inputSize = "small",
   leftIcon = null,
   rightIcon = null,
+  onClickToIcon,
   ...props
 }: InputProps) {
   const inputHeight = inputSize === "small" ? "h-11" : "h-12";
@@ -31,7 +33,10 @@ export function Input({
       )}
       <input className={inputStyle} {...props} />
       {rightIcon !== null && (
-        <div className="absolute items-center flex right-4 mr-4 text-darkGreen">
+        <div
+          className="absolute items-center flex right-4 mr-4 text-darkGreen"
+          onClick={onClickToIcon}
+        >
           {getIconType(rightIcon)}
         </div>
       )}
