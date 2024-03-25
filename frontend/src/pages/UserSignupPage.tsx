@@ -3,6 +3,8 @@ import { Button } from "../ui/Button";
 import { Input } from "../ui/Input";
 import { getIconType } from "../utils/getIconType";
 import { useNavigate } from "react-router-dom";
+import { useUserRegistrationMutation } from "../react-query/hooks";
+import { sha256 } from "js-sha256";
 
 export function UserSignupPage() {
   const [firstName, setFirstName] = useState("");
@@ -32,12 +34,6 @@ export function UserSignupPage() {
   const [countryError, setCountryError] = useState("");
 
   const navigate = useNavigate();
-
-  const submitForm = () => {
-    if (validateData()) {
-      navigate("/");
-    }
-  };
 
   function validateData(): boolean {
     // First name validation
@@ -177,6 +173,33 @@ export function UserSignupPage() {
     }
     return isFormValid;
   }
+
+  const userRegistrationMutation = useUserRegistrationMutation({
+    onSuccess: (res) => {
+      console.log(res);
+      navigate("/signupChoice");
+    },
+    onError: (error) => {
+      console.log("ERROR: " + error);
+    },
+  });
+
+  const submitForm = () => {
+    if (validateData()) {
+      userRegistrationMutation.mutate({
+        first_name: firstName,
+        last_name: lastName,
+        email: email,
+        password_hash: sha256(password),
+        street_name: street,
+        house: house,
+        postal_code: postal,
+        city: city,
+        country: country,
+      });
+    }
+  };
+
   return (
     <div className="bg-blue flex flex-col min-h-screen">
       <p className="text-4xl text-white self-start font-quicksand font-semibold ml-12 mt-10">

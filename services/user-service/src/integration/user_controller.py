@@ -4,8 +4,10 @@ import json
 from src.application.user_service import UserService
 from src.integration.model import user
 from src.integration.model import response_config
+from flask_cors import CORS
 
 app = Flask(__name__)
+CORS(app)
 
 def registration_handler(event, context):
  
