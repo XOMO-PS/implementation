@@ -5,6 +5,8 @@ import { getIconType } from "../utils/getIconType";
 import { useNavigate } from "react-router-dom";
 import { useUserRegistrationMutation } from "../react-query/hooks";
 import { sha256 } from "js-sha256";
+import { Loader } from "../ui/Loader";
+import { toast } from "react-toastify";
 
 export function UserSignupPage() {
   const [firstName, setFirstName] = useState("");
@@ -176,11 +178,25 @@ export function UserSignupPage() {
 
   const userRegistrationMutation = useUserRegistrationMutation({
     onSuccess: (res) => {
-      console.log(res);
-      navigate("/signupChoice");
+      toast("User is succesfully registered!", {
+        position: "top-center",
+        type: "success",
+      });
+      navigate("/signupChoose");
     },
     onError: (error) => {
-      console.log("ERROR: " + error);
+      if (error.response !== null && error.response.data !== null) {
+        //alert("ERROR: " + error.response.data.message);
+        toast("ERROR: " + error.response.data.message, {
+          position: "top-center",
+          type: "error",
+        });
+      } else {
+        toast("Unknown error", {
+          position: "top-center",
+          type: "error",
+        });
+      }
     },
   });
 
@@ -199,6 +215,10 @@ export function UserSignupPage() {
       });
     }
   };
+
+  if (userRegistrationMutation.isPending) {
+    return <Loader />;
+  }
 
   return (
     <div className="bg-blue flex flex-col min-h-screen">
