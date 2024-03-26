@@ -23,11 +23,6 @@ functions:
           integration: lambda-proxy
           cors: true
 
-      - http:
-          path: user/register
-          method: options
-          cors: true
-
   sign_in:
     handler: src.integration.user_controller.sign_in_handler
     events:

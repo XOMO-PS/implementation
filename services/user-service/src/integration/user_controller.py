@@ -13,8 +13,9 @@ CORS(app)
 def registration_handler(event, context):
  
     with app.app_context():
-        if event['httpMethod'] == 'OPTIONS':
+        """if event['httpMethod'] == 'OPTIONS':
         # Respond to preflight request
+            
             return {
                 'statusCode': 200,
                 'headers': {
@@ -23,7 +24,8 @@ def registration_handler(event, context):
                     'Access-Control-Allow-Methods': '*'
                 }
             }
-        elif event['httpMethod'] == 'POST' and 'body' in event and event['body']:
+        """
+        if 'body' in event and event['body']:
             request_body = json.loads(event['body'])            
             try:
                 new_user = user.User(**request_body)
