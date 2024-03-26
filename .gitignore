@@ -31,3 +31,4 @@ package.json
 package-lock.json
 
 .venv/**
+services/user-service/venv

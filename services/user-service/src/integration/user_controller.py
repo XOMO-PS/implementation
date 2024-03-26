@@ -9,6 +9,7 @@ from flask_cors import CORS
 app = Flask(__name__)
 CORS(app)
 
+
 def registration_handler(event, context):
  
     with app.app_context():

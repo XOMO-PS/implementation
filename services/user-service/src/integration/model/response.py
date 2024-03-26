@@ -9,5 +9,10 @@ class Response:
     def to_json(self):
         return {
             'statusCode': self.status_code,
-            'body': json.dumps({'message': self.message})
+            'body': json.dumps({'message': self.message}),
+            'headers': {
+                'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
+                'Access-Control-Allow-Origin': '*',
+                'Access-Control-Allow-Methods': '*'
+            },
         }
