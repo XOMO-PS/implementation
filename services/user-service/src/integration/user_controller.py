@@ -13,33 +13,12 @@ CORS(app)
 def registration_handler(event, context):
  
     with app.app_context():
-        """if event['httpMethod'] == 'OPTIONS':
-        # Respond to preflight request
-            
-            return {
-                'statusCode': 200,
-                'headers': {
-                    'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
-                    'Access-Control-Allow-Origin': '*',
-                    'Access-Control-Allow-Methods': '*'
-                }
-            }
-        """
         if 'body' in event and event['body']:
             request_body = json.loads(event['body'])            
             try:
                 new_user = user.User(**request_body)
                 response = UserService().register_user(user_info=new_user)
-                return {
-                        'statusCode': response.to_json()['statusCode'],
-                        'headers': {
-                            'Access-Control-Allow-Headers': 'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token',
-                            'Access-Control-Allow-Origin': '*',
-                            'Access-Control-Allow-Methods': '*'
-                        },
-                    'body': response.to_json()['body']
-                }
-                #return response.to_json()
+                return response.to_json()
         
             except Exception as e:
                 error_message = str(e)
