@@ -5,6 +5,7 @@ import { SignupChoose } from "./pages/SignupChoice";
 import { ProviderSignup } from "./pages/ProviderSignup";
 import SearchService from "./pages/SearchService";
 import { UserSignupPage } from "./pages/UserSignupPage";
+import Login from "./pages/Login";
 
 export function Nav() {
   return (
@@ -14,6 +15,7 @@ export function Nav() {
       <Route path="/signupChoose" element={<SignupChoose />} />
       <Route path="/providerSignup" element={<ProviderSignup />} />
       <Route path="/searchService" element={<SearchService />} />
+      <Route path="/login" element={<Login />} />
     </Routes>
   );
 }
