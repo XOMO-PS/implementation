@@ -27,7 +27,10 @@ export function Input({
   return (
     <div className="flex flex-row items-center relative">
       {leftIcon !== null && (
-        <div className="absolute items-center flex ml-4 text-darkGreen">
+        <div
+          className="absolute items-center flex ml-4 text-darkGreen"
+          data-testid="leftIcon"
+        >
           {getIconType(leftIcon)}
         </div>
       )}
@@ -36,6 +39,7 @@ export function Input({
         <div
           className="absolute items-center flex right-4 mr-4 text-darkGreen"
           onClick={onClickToIcon}
+          data-testid="rightIcon"
         >
           {getIconType(rightIcon)}
         </div>
