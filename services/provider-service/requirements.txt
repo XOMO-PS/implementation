@@ -1,0 +1,7 @@
+asn1crypto==1.5.1
+bcrypt==3.1.4
+boto3==1.34.68
+botocore==1.34.68
+passlib==1.7.4
+pg8000==1.30.5
+scramp==1.4.4               

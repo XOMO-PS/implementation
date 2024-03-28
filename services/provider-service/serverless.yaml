@@ -1,0 +1,28 @@
+service: provider-service
+
+frameworkVersion: "3"
+
+package:
+  patterns:
+    - "!.**/**"
+
+provider:
+  name: aws
+  runtime: python3.9
+  region: eu-north-1
+  iam:
+    role:
+      managedPolicies:
+        - "arn:aws:iam::381492106198:policy/ProviderServiceReadSecret"
+
+functions:
+  registration_handler:
+    handler: src.integration.provider_controller.registration_handler
+    events:
+      - http:
+          path: user/create-provider
+          method: post
+          integration: lambda-proxy
+          cors: true
+plugins:
+  - serverless-python-requirements

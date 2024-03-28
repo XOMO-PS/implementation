@@ -1,5 +1,5 @@
 import pg8000
-from config.db_config import DBConfig
+from src.configuration.db_config import DBConfig
 
 class DBConnection:
     def __init__(self):
