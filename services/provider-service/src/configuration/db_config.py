@@ -6,16 +6,14 @@ class DBConfig:
     def __init__(self):
         self.secret_name = 'provider-services'
         self.region_name = 'eu-north-1'
-        self.aws_access_key_id = 'AKIAVRUVTSPLNQU7DZVB'
-        self.aws_secret_access_key = '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'
+
 
     def get_secrets(self):
         session = boto3.session.Session()
         client = session.client(
             service_name='secretsmanager',
             region_name=self.region_name,
-            aws_access_key_id=self.aws_access_key_id,
-            aws_secret_access_key=self.aws_secret_access_key
+           
         )
         #print(client)
         
